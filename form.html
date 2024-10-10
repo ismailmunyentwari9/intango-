@@ -1,0 +1,57 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        form{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap:12px;
+            border: 1px solid black;
+            width: 70%;
+            margin: auto;
+            padding: 50px 0px;
+            margin-top: 13%;
+        }
+        textarea,input,button{
+            font-size: 25px;
+            width: 80%;
+            height: 2rem;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <form action="" method="POST">
+        <h1>Add New Book</h1>
+        <input type="text" name="bookName" placeholder="Enter Book Name">
+        <input type="text" name="bookAuthor" placeholder="Enter Book Author">
+       
+        <input type="number" name="bookPages" placeholder="Enter Book Pages">
+        <textarea name="description" rows="5" cols="1" placeholder="Add Description"></textarea>
+        <button type="submit" name="send">Submit</button>
+    </form>
+</body>
+</html>
+
+<?php
+ $conn=new mysqli_connect('localhost','root','','boostore');
+  if(isset($_POST['send'])){
+    $name=$_POST['bookName'];
+    $author=$_POST['bookAuthor'];
+    $pages=$_POST['bookPages'];
+    $desc=$_POST['description'];
+
+    $results=mysqli_query($conn,"INSERT INTO book (name,author,description,pages) VALUES('$name','$author','$pages','$desc')");
+    
+    if($results){
+       echo "<script> alert('data Submitted successfully') </script>";
+    }
+    else{
+         echo" <script> alert('data Failed to be submitted')</script>";
+    }
+  }
+?>
